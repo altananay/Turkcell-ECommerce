@@ -17,7 +17,7 @@ public class ProductValidator {
 
     public static void checkIfDescriptionLengthValid(Product product) {
         if (product.getDescription().length() < 10 || product.getDescription().length() > 50) {
-            System.out.println("test");
+            System.out.println("test2");
             throw new IllegalArgumentException("Description length must be between 10 and 50 characters.");
         }
     }
