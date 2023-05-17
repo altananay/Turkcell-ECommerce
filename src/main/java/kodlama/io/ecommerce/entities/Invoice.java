@@ -1,13 +1,12 @@
 package kodlama.io.ecommerce.entities;
 
 import jakarta.persistence.*;
-import kodlama.io.ecommerce.entities.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -15,20 +14,20 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "invoices")
+public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String name;
-    private int quantity;
-    private double unitPrice;
-    private String description;
-    @Enumerated(EnumType.STRING)
-    private State state;
 
-    @ManyToMany
-    private List<Category> category;
+    private String firstName;
+
+    private String lastName;
+
+    @OneToOne
+    private Sale sale;
+
+    private LocalDateTime createdAt;
 
 }
