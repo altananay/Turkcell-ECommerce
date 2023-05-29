@@ -28,7 +28,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private State state;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Category> category;
 
 }

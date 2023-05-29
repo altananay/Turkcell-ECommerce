@@ -1,6 +1,6 @@
-package kodlama.io.ecommerce.entities;
+package kodlama.io.ecommerce.business.dto.requests.update;
 
-import jakarta.persistence.*;
+import kodlama.io.ecommerce.business.dto.requests.create.CreateProductRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,18 +14,9 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "sales")
-@Entity
-public class Sale {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class UpdateSaleRequest {
     private UUID id;
     private double price;
     private LocalDateTime saleDate;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> products;
-
-    private String description;
-
+    List<CreateProductRequest> products;
 }

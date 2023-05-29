@@ -1,6 +1,5 @@
-package kodlama.io.ecommerce.entities;
+package kodlama.io.ecommerce.business.dto.responses.get;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,18 +13,9 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "sales")
-@Entity
-public class Sale {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class GetAllSalesResponse {
     private UUID id;
     private double price;
     private LocalDateTime saleDate;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> products;
-
-    private String description;
-
+    private List<GetProductResponse> products;
 }

@@ -4,6 +4,7 @@ import kodlama.io.ecommerce.business.abstracts.CategoryService;
 import kodlama.io.ecommerce.business.abstracts.ProductService;
 import kodlama.io.ecommerce.business.dto.requests.create.CreateProductRequest;
 import kodlama.io.ecommerce.business.dto.requests.get.GetByCategoryNameRequest;
+import kodlama.io.ecommerce.business.dto.requests.update.SetProductStateRequest;
 import kodlama.io.ecommerce.business.dto.requests.update.UpdateProductRequest;
 import kodlama.io.ecommerce.business.dto.responses.create.CreateProductResponse;
 import kodlama.io.ecommerce.business.dto.responses.get.GetAllProductsResponse;
@@ -58,11 +59,19 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public List<GetAllProductsResponse> getAll() {
-        List<Product> products = productRepository.findAll();
+    public List<GetAllProductsResponse> getAll(boolean state) {
+        List<Product> products = filterProductByState(state);
         List<GetAllProductsResponse> responses = products.stream().map(product -> mapper.map(product, GetAllProductsResponse.class)).toList();
 
         return responses;
+    }
+
+    private List<Product> filterProductByState(boolean state)
+    {
+        if (state)
+            return productRepository.findAll();
+
+        return productRepository.findAllByStateIsNot(State.Active);
     }
 
     @Override
@@ -81,6 +90,22 @@ public class ProductManager implements ProductService {
         Category category = mapper.map(categoryService.getByName(categoryName), Category.class);
         categories.add(category);
         product.setCategory(categories);
+        productRepository.save(product);
+    }
+
+    @Override
+    public void setProductState(SetProductStateRequest request) {
+        var product = mapper.map(getById(request.getId()), Product.class);
+        product.setId(request.getId());
+        product.setState(request.getState());
+        productRepository.save(product);
+    }
+
+    @Override
+    public void setProductQuantity(UUID id, int quantity) {
+        var product = mapper.map(getById(id), Product.class);
+        product.setId(id);
+        product.setQuantity(product.getQuantity() - quantity);
         productRepository.save(product);
     }
 }

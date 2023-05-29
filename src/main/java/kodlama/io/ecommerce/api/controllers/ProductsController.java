@@ -25,9 +25,9 @@ public class ProductsController {
 
 
     @GetMapping
-    public List<GetAllProductsResponse> getAll()
+    public List<GetAllProductsResponse> getAll(@RequestParam(defaultValue = "true") boolean state)
     {
-        return productService.getAll();
+        return productService.getAll(state);
     }
 
     @GetMapping("/{id}")
