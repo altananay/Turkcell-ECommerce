@@ -20,6 +20,14 @@ public class SaleBusinessRules {
             throw new BusinessException(Messages.Product.OutOfStock);
     }
 
+    public void checkQuantityForProduct(UUID id, int quantity)
+    {
+        var product = productService.getById(id);
+        if (quantity > product.getQuantity())
+            throw new BusinessException(Messages.Product.OutOfStock);
+
+    }
+
     public void checkProductState(UUID id)
     {
         var product = productService.getById(id);

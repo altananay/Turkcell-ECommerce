@@ -1,4 +1,4 @@
-package kodlama.io.ecommerce.business.dto.responses.update;
+package kodlama.io.ecommerce.business.dto.requests.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,8 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateProductResponse {
+public class UpdateBrandRequest {
     private UUID id;
-    private UUID brandId;
+
     private String name;
-    private int quantity;
-    private double unitPrice;
-    private String description;
-    private String state;
 }

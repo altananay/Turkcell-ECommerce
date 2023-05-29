@@ -64,7 +64,7 @@ public class SaleManager implements SaleService {
         List<Product> products = new ArrayList<>();
         for (int i = 0; i < requests.size(); i++)
         {
-            checkProductBusinessRules(requests.get(i).getId());
+            checkProductBusinessRules(requests.get(i).getId(), requests.get(i).getQuantity());
             productService.setProductQuantity(requests.get(i).getId(), requests.get(i).getQuantity());
             var response = productService.getById(requests.get(i).getId());
             Product product = mapper.map(response, Product.class);
@@ -74,8 +74,9 @@ public class SaleManager implements SaleService {
         return products;
     }
 
-    private void checkProductBusinessRules(UUID id)
+    private void checkProductBusinessRules(UUID id, int quantity)
     {
+        saleBusinessRules.checkQuantityForProduct(id, quantity);
         productBusinessRules.checkIfProductExists(id);
         saleBusinessRules.checkOutOfStock(id);
         saleBusinessRules.checkProductState(id);

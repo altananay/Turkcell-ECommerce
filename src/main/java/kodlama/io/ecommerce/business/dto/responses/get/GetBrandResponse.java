@@ -1,5 +1,4 @@
-package kodlama.io.ecommerce.business.dto.responses.create;
-
+package kodlama.io.ecommerce.business.dto.responses.get;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,12 +11,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateProductResponse {
+public class GetBrandResponse {
     private UUID id;
-    private UUID brandId;
     private String name;
-    private int quantity;
-    private double unitPrice;
-    private String description;
-    private String state;
 }

@@ -11,12 +11,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateProductResponse {
+public class UpdateBrandResponse {
     private UUID id;
-    private UUID brandId;
     private String name;
-    private int quantity;
-    private double unitPrice;
-    private String description;
-    private String state;
 }

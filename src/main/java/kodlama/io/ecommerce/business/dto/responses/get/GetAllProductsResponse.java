@@ -15,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class GetAllProductsResponse {
     private UUID id;
+    private UUID brandId;
     private String name;
     private int quantity;
     private double unitPrice;

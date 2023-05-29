@@ -28,7 +28,11 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private State state;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Category> category;
 
 }
