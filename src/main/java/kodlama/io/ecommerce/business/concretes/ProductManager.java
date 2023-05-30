@@ -11,6 +11,7 @@ import kodlama.io.ecommerce.business.dto.responses.get.GetAllProductsResponse;
 import kodlama.io.ecommerce.business.dto.responses.get.GetProductResponse;
 import kodlama.io.ecommerce.business.dto.responses.update.UpdateProductResponse;
 import kodlama.io.ecommerce.business.rules.ProductBusinessRules;
+import kodlama.io.ecommerce.common.dto.CreateProductPaymentRequest;
 import kodlama.io.ecommerce.entities.Category;
 import kodlama.io.ecommerce.entities.Product;
 import kodlama.io.ecommerce.entities.enums.State;
