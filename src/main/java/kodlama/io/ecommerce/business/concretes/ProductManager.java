@@ -33,6 +33,7 @@ public class ProductManager implements ProductService {
     private final ModelMapper mapper;
     private final ProductBusinessRules rules;
 
+
     @Override
     public CreateProductResponse add(CreateProductRequest request) {
         var product = mapper.map(request, Product.class);

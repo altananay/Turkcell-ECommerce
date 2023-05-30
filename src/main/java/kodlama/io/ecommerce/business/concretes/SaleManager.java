@@ -1,9 +1,11 @@
 package kodlama.io.ecommerce.business.concretes;
 
+import kodlama.io.ecommerce.business.abstracts.InvoiceService;
 import kodlama.io.ecommerce.business.abstracts.PaymentService;
 import kodlama.io.ecommerce.business.abstracts.ProductService;
 import kodlama.io.ecommerce.business.abstracts.SaleService;
 import kodlama.io.ecommerce.business.dto.requests.SaleProductRequest;
+import kodlama.io.ecommerce.business.dto.requests.create.CreateInvoiceRequest;
 import kodlama.io.ecommerce.business.dto.requests.create.CreateSaleRequest;
 import kodlama.io.ecommerce.business.dto.requests.update.UpdateSaleRequest;
 import kodlama.io.ecommerce.business.dto.responses.create.CreateSaleResponse;
@@ -35,6 +37,7 @@ public class SaleManager implements SaleService {
     private final ProductBusinessRules productBusinessRules;
     private final SaleBusinessRules saleBusinessRules;
     private final PaymentService paymentService;
+    private final InvoiceService invoiceService;
 
     @Override
     public List<GetAllSalesResponse> getAll() {
@@ -68,9 +71,16 @@ public class SaleManager implements SaleService {
 
         sale.setSaleDate(LocalDateTime.now());
 
-        repository.save(sale);
+        var createdSale = repository.save(sale);
         setProductQuantity(request.getProducts());
         CreateSaleResponse response = mapper.map(sale, CreateSaleResponse.class);
+
+        CreateInvoiceRequest invoiceRequest = new CreateInvoiceRequest();
+        invoiceRequest.setSaleId(createdSale.getId());
+        invoiceRequest.setCardHolder(paymentRequest.getCardHolder());
+
+        invoiceService.add(invoiceRequest);
+
         return response;
     }
 

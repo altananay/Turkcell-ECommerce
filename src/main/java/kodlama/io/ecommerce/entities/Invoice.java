@@ -21,9 +21,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String firstName;
-
-    private String lastName;
+    private String cardHolder;
 
     @OneToOne
     private Sale sale;
